@@ -16,6 +16,7 @@ limitations under the License.
 package filters
 
 import (
+	"fmt"
 	"net/http"
 	"path"
 )
@@ -38,6 +39,7 @@ func WithAllowPaths(allowPaths []string, handler http.HandlerFunc) http.HandlerF
 			}
 
 			if found {
+				fmt.Println("Serving up request with path", req.URL)
 				handler.ServeHTTP(w, req)
 				return
 			}
