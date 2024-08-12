@@ -42,6 +42,8 @@ func WithAllowPaths(allowPaths []string, handler http.HandlerFunc) http.HandlerF
 				fmt.Println("Serving up request with path", req.URL)
 				handler.ServeHTTP(w, req)
 				return
+			} else {
+				fmt.Println("Path not found with pathAllowed", pathAllowed, "and request path", req.URL.Path)
 			}
 		}
 
