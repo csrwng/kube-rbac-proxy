@@ -288,6 +288,10 @@ func Run(cfg *completedProxyRunOptions) error {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		ignorePathFound := false
 		for _, pathIgnored := range cfg.ignorePaths {
+			if pathIgnored == "*" {
+				ignorePathFound = true
+				break
+			}
 			ignorePathFound, err = path.Match(pathIgnored, req.URL.Path)
 			if err != nil {
 				http.Error(
